@@ -21,7 +21,7 @@ A robust PHP file upload service built to ensure secure file uploads by checking
 
 1. Clone this repository or download the PHP file.
    ```bash
-   git clone https://github.com/taufikinfo/AdiantiUploaderService.git
+   git clone https://github.com/taufikinfo/patch-adianti.git
    cd AdiantiUploaderService```
    
    
