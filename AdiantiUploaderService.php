@@ -104,10 +104,13 @@ class AdiantiUploaderService
                         return;
                     }
 					
-					$this->checkSecurity($file);
+
 					
 			       
                 }
+
+                //check files contents
+                $this->checkSecurity($file);
                 
                 if (is_writable($folder) )
                 {
