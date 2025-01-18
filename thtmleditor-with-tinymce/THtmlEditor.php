@@ -1,4 +1,5 @@
 <?php
+
 namespace Adianti\Widget\Form;
 
 use Adianti\Core\AdiantiApplicationConfig;
@@ -38,7 +39,7 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
     public function __construct($name)
     {
         parent::__construct($name);
-        $this->id = 'THtmlEditor_'.mt_rand(1000000000, 1999999999);
+        $this->id = 'THtmlEditor_' . mt_rand(1000000000, 1999999999);
         $this->toolbar = true;
         $this->options = [];
         $this->customButtons = [];
@@ -55,8 +56,7 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
      */
     public function setMaxLength($length)
     {
-        if ($length > 0)
-        {
+        if ($length > 0) {
             $this->options['maxlength'] = $length;
         }
     }
@@ -98,8 +98,7 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
     public function setSize($width, $height = NULL)
     {
         $this->size   = $width;
-        if ($height)
-        {
+        if ($height) {
             $this->height = $height;
         }
     }
@@ -110,7 +109,7 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
      */
     public function getSize()
     {
-        return array( $this->size, $this->height );
+        return array($this->size, $this->height);
     }
 
     /**
@@ -137,7 +136,7 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
      */
     public static function enableField($form_name, $field)
     {
-        TScript::create( " thtmleditor_enable_field('{$form_name}', '{$field}' ,'" . self::$lastId . "'); " );
+        TScript::create(" thtmleditor_enable_field('{$form_name}', '{$field}' ,'" . self::$lastId . "'); ");
     }
 
     /**
@@ -147,8 +146,7 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
      */
     public static function disableField($form_name, $field)
     {
-        TScript::create( " thtmleditor_disable_field('{$form_name}', '{$field}' ,'" . self::$lastId . "');");
-
+        TScript::create(" thtmleditor_disable_field('{$form_name}', '{$field}' ,'" . self::$lastId . "');");
     }
 
     /**
@@ -158,7 +156,7 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
      */
     public static function clearField($form_name, $field)
     {
-        TScript::create( " thtmleditor_clear_field('{$form_name}', '{$field}'); " );
+        TScript::create(" thtmleditor_clear_field('{$form_name}', '{$field}' ,'" . self::$lastId . "'); ");
     }
 
     /**
@@ -181,7 +179,7 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
      */
     public static function insertText($form_name, $field, $content)
     {
-        TScript::create( " thtmleditor_insert_text('{$form_name}', '{$field}', '{$content}'); " );
+        TScript::create(" thtmleditor_insert_text('{$form_name}', '{$field}', '{$content}' ,'" . self::$lastId . "'); ");
     }
 
     /**
@@ -193,7 +191,7 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
     public static function insertHTML($form_name, $field, $content)
     {
         $content64 = base64_encode($content);
-        TScript::create( " thtmleditor_insert_html('{$form_name}', '{$field}', '{$content64}'); " );
+        TScript::create(" thtmleditor_insert_html('{$form_name}', '{$field}', '{$content64}' ,'" . self::$lastId . "'); ");
     }
 
     /**
@@ -209,7 +207,7 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
         $locale = !empty($ini['general']['locale']) ? $ini['general']['locale'] : 'pt_BR';
 
         // add the content to the textarea
-        $this->tag->add(htmlspecialchars( (string) $this->value));
+        $this->tag->add(htmlspecialchars((string) $this->value));
 
         $this->tag->style = 'width:1px;height:1px;position: absolute;left: 10px;top: 10px;';
         // show the tag
@@ -219,17 +217,15 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
         $div->show();
 
         $options = $this->options;
-        if (!$this->toolbar)
-        {
-            $options[ 'airMode'] = true;
+        if (!$this->toolbar) {
+            $options['airMode'] = true;
         }
-        if (!empty($this->completion))
-        {
-            $options[ 'completion'] = $this->completion;
+        if (!empty($this->completion)) {
+            $options['completion'] = $this->completion;
         }
 
-        $options_json = json_encode( $options );
-        $buttons_json = json_encode( $this->customButtons );
+        $options_json = json_encode($options);
+        $buttons_json = json_encode($this->customButtons);
 
         $id = $this->tag->{'id'};
 
@@ -237,9 +233,8 @@ class THtmlEditor extends TField implements AdiantiWidgetInterface
         TScript::create(" $('#{$id}').parent().show();");
 
         // check if the field is not editable
-        if (!parent::getEditable())
-        {
-            TScript::create( " thtmleditor_disable_field('{$this->formName}', '{$this->name}'); " );
+        if (!parent::getEditable()) {
+            TScript::create(" thtmleditor_disable_field('{$this->formName}', '{$this->name}'); ");
         }
     }
 }
