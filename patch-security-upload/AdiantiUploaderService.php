@@ -1,8 +1,7 @@
 <?php
-namespace Adianti\Service;
 
-use Adianti\Core\AdiantiCoreTranslator;
 use Adianti\Core\AdiantiApplicationConfig;
+use Adianti\Core\AdiantiCoreTranslator;
 
 /**
  * File uploader listener
@@ -51,7 +50,7 @@ class AdiantiUploaderService
     function show($param)
     {
         $ini  = AdiantiApplicationConfig::get();
-        $seed = APPLICATION_NAME . ( !empty($ini['general']['seed']) ? $ini['general']['seed'] : 's8dkld83kf73kf094' );
+        $seed = \Adianti\Service\APPLICATION_NAME . ( !empty($ini['general']['seed']) ? $ini['general']['seed'] : 's8dkld83kf73kf094' );
         $block_extensions = ['php', 'php3', 'php4', 'phtml', 'pl', 'py', 'jsp', 'asp', 'htm', 'shtml', 'sh', 'cgi', 'htaccess' ,'phar'];
         
         $folder = 'tmp/';
